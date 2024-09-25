@@ -14,6 +14,8 @@ protocol WeatherManagerDelegate {
     func didFailWithError(error: Error)
 }
 
+//MARK: - creating the URL of our ap
+
 struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="
     let endURL = "&appid=80ce5549e68fe8f36f5705d662e812b1"
@@ -25,10 +27,17 @@ struct WeatherManager {
         performRequest(with: urlString)
     }
     
+    //MARK: - passing our location
     func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
+        
+       let apiLocationURL = "https://api.openweathermap.org/data/2.5/weather?"
+        
+        
+        let urlString = "\(apiLocationURL)&lat=\(latitude)&lon=\(longitude)&appid=80ce5549e68fe8f36f5705d662e812b1"
         performRequest(with: urlString)
     }
+    
+    
     
     func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
